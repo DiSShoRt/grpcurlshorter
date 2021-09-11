@@ -4,7 +4,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
-	urlshort "grpcurlshorter/pkg/interf"
+	urlshort "grpcurlshorter/pkg/mydescription"
 
 	"grpcurlshorter/pkg/urlshorter"
 
