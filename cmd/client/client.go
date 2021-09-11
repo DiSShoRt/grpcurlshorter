@@ -6,7 +6,7 @@ import (
 	"google.golang.org/grpc"
 	"grpcurlshorter/pkg/urlshorter"
 )
-cd
+
 func main() {
 
 	var x string
