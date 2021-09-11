@@ -1,0 +1,8 @@
+start-up instructions:
+
+
+git clone  https://github.com/DiSShoRt/grpcurlshorter
+cd ./grpcurlshorter
+sudo docker build  -t urlshorter .
+docker run -d --network=host   -e "DB_DBNAME=postgres"   -e "DB_PORT=5432"   -e "DB_USER=anton"   -e "DB_PASS=123"   -e "DB_HOST=127.0.0.1" urlshorter
+go run ./cmd/client/client.go
