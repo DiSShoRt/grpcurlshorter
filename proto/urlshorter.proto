@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package urlshorter;
+option go_package = "./pkg/urlshorter";
+service urluhorter {
+  rpc Create(LongUrl) returns (ShortUrl) {};
+  rpc Get(ShortUrl) returns (LongUrl) {};
+}
+
+message LongUrl {
+  string long = 1;
+}
+
+message ShortUrl {
+  string short = 1;
+}
