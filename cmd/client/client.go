@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"grpcurlshorter/pkg/urlshorter"
+	"log"
 )
 
 func main() {
@@ -19,7 +20,7 @@ func main() {
 
 	r, err := c.Create(context.Background(), &urlshorter.LongUrl{Long: x})
 	if err != nil {
-		log.Printf("error %e in Create ", err)
+		log.Printf("error %s in Create ", err)
 
 	} else {
 		res, _ := c.Get(context.Background(), &urlshorter.ShortUrl{Short: r.Short})
@@ -27,5 +28,4 @@ func main() {
 	}
 
 	fmt.Println("Create", r)
-        }
 }

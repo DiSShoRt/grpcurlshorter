@@ -18,12 +18,6 @@ type UserModele struct {
 const connStr = "user=anton password=123 dbname=postgres sslmode=disable"
 
 func AddUrlToDb(s string) (string, error) {
-	err := Check(s)
-	if err != nil {
-		log.Fatalf("this url %s is in the database\n", s)
-		return s, fmt.Errorf("this url %s is in the database\n", s)
-		panic(err)
-	}
 
 	if s == "" {
 		return "", fmt.Errorf("empty string in request\n")
@@ -32,8 +26,6 @@ func AddUrlToDb(s string) (string, error) {
 	if !IsUrl(s) {
 		return s, fmt.Errorf("no valid url\n")
 	}
-
-	fmt.Println(err)
 
 	conf, err := pgx.ParseConnectionString(connStr)
 
@@ -49,8 +41,10 @@ func AddUrlToDb(s string) (string, error) {
 
 	var surl string
 
-	if err != nil {
+	if Check(s) {
 		err = db.QueryRow("INSERT INTO url VALUES ( $1, $2) returning short_url", shortUrl, s).Scan(&surl)
+	} else {
+		log.Printf("this url %s is in database\n", s)
 	}
 	if err != nil {
 		log.Printf("cant connect to db %s", err)
@@ -113,7 +107,7 @@ func IsUrl(url string) bool {
 	return true
 }
 
-func Check(s string) error {
+func Check(s string) bool {
 
 	//create connect config
 	conf, err := pgx.ParseConnectionString(connStr)
@@ -136,11 +130,11 @@ func Check(s string) error {
 		if s == p.Lurl || s == p.Surl {
 			fmt.Println(err)
 			fmt.Printf("this url %s is in database\n", s)
-			return fmt.Errorf("this url %s is in database\n", s)
+			return false
 
 		}
 
 	}
 
-	return nil
+	return true
 }
