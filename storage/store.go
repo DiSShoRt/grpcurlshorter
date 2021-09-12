@@ -1,7 +1,7 @@
 package storage
 
 import (
-	//"crypto/rand"
+	
 	"fmt"
 	"github.com/jackc/pgx"
 	"log"
@@ -9,20 +9,9 @@ import (
 	u "net/url"
 	"strings"
 	"time"
-	//	"time"
-	//	"math/rand"
-	//"database/sql"
-	//	"math/big"
+
 )
 
-type Config struct {
-	Host     string
-	Port     string
-	UserName string
-	Password string
-	DBName   string
-	SSLMode  string
-}
 
 //connStr := "user=anton password=123 dbname=postgres sslmode=disable"
 
@@ -67,14 +56,6 @@ type UserModele struct {
 
 func GetUrlFromDb(s string) (string, error) {
 
-	//	db, err := NewPOstgresDb(Config{
-	//		Host:     viper.GetString("db.host"),
-	//		Port:     viper.GetString("db.port"),
-	//		UserName: viper.GetString("db.username"),
-	//		Password: os.Getenv("DB_PASSWORD"),
-	//		DBName:   viper.GetString("db.dbname"),
-	//		SSLMode:  viper.GetString("sslmode"),
-	//	})
 	if s == "" {
 		log.Println("empty string")
 		return s, fmt.Errorf("empty string in request")
@@ -117,7 +98,7 @@ func GetUrlFromDb(s string) (string, error) {
 func GetHash() string {
 	rand.Seed(time.Now().Unix())
 	letter := []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_1234567890")
-	//letterBytes := []byte(letter)
+	
 	var b strings.Builder
 	for i := 0; i < 10; i++ {
 		b.WriteRune(letter[rand.Intn(len(letter))])
