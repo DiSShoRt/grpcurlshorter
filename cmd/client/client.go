@@ -17,9 +17,15 @@ func main() {
 	conn, _ := grpc.Dial(":8080", grpc.WithInsecure())
 	c := urlshorter.NewUrluhorterClient(conn)
 
-	r ,_ :=c.Create(context.Background(), &urlshorter.LongUrl{Long: x})
-	res, _ :=c.Get(context.Background(), &urlshorter.ShortUrl{Short:r.Short})
+	r, err := c.Create(context.Background(), &urlshorter.LongUrl{Long: x})
+	if err != nil {
+		log.Printf("error %e in Create ", err)
 
-	fmt.Println(res)
-	fmt.Println(r)
+	} else {
+		res, _ := c.Get(context.Background(), &urlshorter.ShortUrl{Short: r.Short})
+		fmt.Println("Get", res)
+	}
+
+	fmt.Println("Create", r)
+        }
 }
