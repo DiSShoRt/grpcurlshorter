@@ -14,13 +14,7 @@ import (
 )
 
 func main()  {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("env")
-	}
 
-	if err := InitCinfig(); err != nil {
-		log.Fatal("error init config", err)
-	}
 	s := grpc.NewServer()
 	srv := &urlshort.GRPCServer{}
 	urlshorter.RegisterUrluhorterServer(s,srv)
