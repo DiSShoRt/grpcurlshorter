@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"grpcurlshorter/pkg/urlshorter"
+	"log"
 )
 
 func main() {
@@ -27,5 +28,5 @@ func main() {
 	}
 
 	fmt.Println("Create", r)
-        }
 }
+
