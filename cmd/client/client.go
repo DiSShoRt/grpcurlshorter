@@ -15,7 +15,7 @@ func main() {
 
 	fmt.Scan(&x)
 
-	conn, _ := grpc.Dial(":8080", grpc.WithInsecure())
+	conn, err := grpc.Dial(":8080", grpc.WithInsecure())
 	c := urlshorter.NewUrluhorterClient(conn)
 
 	r, err := c.Create(context.Background(), &urlshorter.LongUrl{Long: x})
@@ -29,4 +29,3 @@ func main() {
 
 	fmt.Println("Create", r)
 }
-
